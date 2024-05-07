@@ -26,15 +26,5 @@ public class pipeMoveScript : MonoBehaviour
             Destroy(gameObject);
 
         }
-
     }
-
-    /*public void restartPipe()
-    {
-
-        if (transform.position.x < newDeadZone)
-        {
-            Debug.Log("Pipe Delted");
-            Destroy(gameObject);
-        }*/
 }

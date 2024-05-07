@@ -11,7 +11,8 @@ public class logicScript : MonoBehaviour
     public int playerScore;
     public TextMeshProUGUI scoreText;
     public GameObject gameOverScreen;
-
+    public GameObject pause;
+    public GameObject scelte;
 
     //command insert in unity 
     [ContextMenu("Incrases Score")]
@@ -27,6 +28,7 @@ public class logicScript : MonoBehaviour
     {
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1.0f;
        
     }
 
@@ -34,7 +36,24 @@ public class logicScript : MonoBehaviour
     public void gameOver()
     {
         gameOverScreen.SetActive(true);
+        pause.SetActive(false);
     }
+
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+        pause.SetActive(false);
+        scelte.SetActive(true);
+
+    }
+    public void Continue()
+    {
+        scelte.SetActive(false);
+        pause.SetActive(true);
+        Time.timeScale = 1f;
+    }
+
+
 
 
     

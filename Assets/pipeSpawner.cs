@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class pipeSpawnerScript : MonoBehaviour
@@ -44,11 +45,11 @@ public class pipeSpawnerScript : MonoBehaviour
     }
     public void difficultEasy()
     {
-        spawnRate = 3.5f;
+        spawnRate = 2.5f;
     }
     public void difficultMedium()
     {
-        spawnRate = 2.5f;
+        spawnRate = 2f;
     }
 
     public void difficultHell()
@@ -56,12 +57,4 @@ public class pipeSpawnerScript : MonoBehaviour
         spawnRate = 1.5f;
     }
 
-    /*public void restartPipe()
-    {
-        if (transform.position.x <= 5)
-        {
-            Debug.Log("Pipe Delted");
-            Destroy(gameObject);
-        }
-    }*/
 }

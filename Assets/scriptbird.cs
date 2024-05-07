@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.Security;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,6 +21,7 @@ public class scriptbird : MonoBehaviour
     private float timer = 0;
     public bool invincible = false;
     [SerializeField] public GameObject crown;
+    public GameObject pause;
 
 
     // Start is called before the first frame update
@@ -37,32 +39,29 @@ public class scriptbird : MonoBehaviour
         {
             myRigidbody.velocity = Vector2.up * flapSrenght;
         }
-
-        /*if (transform.position.x == -45 || transform.position.y == -18)
+        if (transform.position.x < -20)
         {
-
-            birdIsAlive = false;
             logic.gameOver();
-
+        }
+        else if (transform.position.y > 17 || transform.position.y < -17)
+        {
+            logic.gameOver();
         }
 
-        else if (transform.position.x == 45 || transform.position.y == 18)
-        {
-
-            birdIsAlive = false;
-            logic.gameOver();
-            
-        }*/
+        
     }
     //method for confirm the game over 
     //change indentation
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        if (birdIsAlive == true && invincible == false)
+        {
         logic.gameOver();
         birdIsAlive = false;
         Debug.Log("Bird Delted");
         Destroy(gameObject);
+        }
         
     }
     
@@ -76,9 +75,9 @@ public class scriptbird : MonoBehaviour
         mainMenu.SetActive(false);
         birdIsAlive = true;
         powerUp();
+        pause.SetActive(true);
         
-        //not work
-        //pipe.restartPipe();
+        
         
     }
     public void powerUp()
@@ -86,41 +85,25 @@ public class scriptbird : MonoBehaviour
 
         StartCoroutine(TimerInvincible());
 
-
-
-
-
-        /*invincible = true;
-        if (invincible == true)
-        {
-            GetComponent<Collider2D>().enabled = false;
-            
-            timer = timer * Time.deltaTime;
-            
-        }
-        else if (timer <= 3)
-        {
-            invincible = false;
-            GetComponent<Collider2D>().enabled = true;
-            
-        }*/
     }
 
     private IEnumerator TimerInvincible()
     {
         invincible = true;
-        if (invincible == true)
-        {
-            GetComponent<Collider2D>().enabled = false;
-            crown.SetActive(true);
-        }
+
+        //GetComponent<Collider2D>().enabled = false;
+
+        crown.SetActive(true);
+        
 
             yield return new WaitForSeconds(5f);
 
         if (timer <= 3)
         {
             invincible = false;
-            GetComponent<Collider2D>().enabled = true;
+
+            //GetComponent<Collider2D>().enabled = true;
+
             crown.SetActive(false);
 
         }
