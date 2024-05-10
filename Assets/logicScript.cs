@@ -1,10 +1,7 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+
 
 public class logicScript : MonoBehaviour
 {   //variables
@@ -13,9 +10,15 @@ public class logicScript : MonoBehaviour
     public GameObject gameOverScreen;
     public GameObject pause;
     public GameObject scelte;
+    //public GameObject bird;
+    public TextMeshProUGUI recordText;
+    public int playerRecord;
+    [SerializeField] public scriptbird bird;
+    [SerializeField] public pipeMoveScript pipe;
 
     //command insert in unity 
     [ContextMenu("Incrases Score")]
+    [ContextMenu("incrases Record")]
 
     // method for increment the score
     public void addScore(int ScoreToAdd)
@@ -37,6 +40,7 @@ public class logicScript : MonoBehaviour
     {
         gameOverScreen.SetActive(true);
         pause.SetActive(false);
+        //pipe.deadZone = -5;
     }
 
     public void Pause()
@@ -52,9 +56,26 @@ public class logicScript : MonoBehaviour
         pause.SetActive(true);
         Time.timeScale = 1f;
     }
+    public void playAgain()
+    {
+        gameOverScreen.SetActive(false);
+        bird.mainMenu.SetActive(true);
+        //bird.setActive(true);
+        //pipe.deadZone = -45;
+        playerScore = 0;
+        bird.birdIsAlive = true;
+        bird.restartPosition();
 
-
-
-
+    }
     
+    public void playerBestScore()
+    {
+           playerRecord = playerScore;
+           recordText.text = playerRecord.ToString();
+        
+    }
+    public void resetRecord()
+    {
+        playerRecord = 0;
+    }
 }

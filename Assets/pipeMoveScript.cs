@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class pipeMoveScript : MonoBehaviour
 {   //variables
     //public GameObject pipe;
     public float moveSpeed = 5;
     public float deadZone = -45;
+    //[SerializeField] public scriptbird bird;
     
 
     //delete start 
@@ -21,10 +19,15 @@ public class pipeMoveScript : MonoBehaviour
 
         if (transform.position.x < deadZone)
         {
-
-            Debug.Log("Pipe Delted");
             Destroy(gameObject);
-
         }
+        /*else if (bird.birdIsAlive == false)
+        {
+            deadZone = 0;
+        }
+        else
+        {
+            deadZone = -45;
+        }*/
     }
 }

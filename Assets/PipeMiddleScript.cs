@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.Dependencies.NCalc;
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using JetBrains.Annotations;
+
 
 public class PipeMiddleScript : MonoBehaviour
 {
@@ -23,6 +18,10 @@ public class PipeMiddleScript : MonoBehaviour
         if (collision.gameObject.layer == 3)
         {
             logic.addScore(1);
+            if (logic.playerScore > logic.playerRecord)
+            {
+                logic.playerBestScore();
+            }
         }  
         
     }

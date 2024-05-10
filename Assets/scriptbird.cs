@@ -1,12 +1,5 @@
-using JetBrains.Annotations;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Net.Security;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 public class scriptbird : MonoBehaviour
@@ -22,19 +15,30 @@ public class scriptbird : MonoBehaviour
     public bool invincible = false;
     [SerializeField] public GameObject crown;
     public GameObject pause;
+    public GameObject item;
+    public GameObject skin;
+    public GameObject cowboy;
+    public GameObject baseball;
+    public GameObject skull;
+    public float countdown = 0;
+    Vector3 StartPosition;
 
 
     // Start is called before the first frame update
     //change indentation
     void Start()
     {
+        //bruh non usare il gameobject.find
         logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<logicScript>();
-        pipe = GameObject.FindGameObjectWithTag("Pipe").GetComponent<pipeMoveScript>();
+        //pipe = GameObject.FindGameObjectWithTag("Pipe").GetComponent<pipeMoveScript>();
+        StartPosition = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {   //chekers that see if the bird is alive
+        
+        
         if (Input.GetKeyDown(KeyCode.Space) && birdIsAlive)
         {
             myRigidbody.velocity = Vector2.up * flapSrenght;
@@ -42,10 +46,18 @@ public class scriptbird : MonoBehaviour
         if (transform.position.x < -20)
         {
             logic.gameOver();
+            //pipe.deadZone = -5;
+            birdIsAlive = false;
+            Bird.SetActive(false);
+            restartPosition();
         }
         else if (transform.position.y > 17 || transform.position.y < -17)
         {
             logic.gameOver();
+            //pipe.deadZone = -5;
+            birdIsAlive = false;
+            Bird.SetActive(false);
+            restartPosition();
         }
 
         
@@ -59,10 +71,10 @@ public class scriptbird : MonoBehaviour
         {
         logic.gameOver();
         birdIsAlive = false;
-        Debug.Log("Bird Delted");
-        Destroy(gameObject);
+        //pipe.deadZone = -5;
+        //Debug.Log("Bird Delted");
+        Bird.SetActive(false);
         }
-        
     }
     
 
@@ -70,21 +82,65 @@ public class scriptbird : MonoBehaviour
     public void startGame()
     {
         
-        Debug.Log("main Menu Deleted");
+        //Debug.Log("main Menu Deleted");
         Bird.SetActive(true);
         mainMenu.SetActive(false);
         birdIsAlive = true;
         powerUp();
         pause.SetActive(true);
+        item.SetActive(true);
+        //pipe.deadZone = -45;
+        //pausaPlayer();
         
+
         
+    }
+    public void skinMenu()
+    {
+        mainMenu.SetActive(false);
+        Time.timeScale = 0f;
+        skin.SetActive(true);
+    }
+    public void cowboyHat()
+    {
+        cowboy.SetActive(true);
+        mainMenu.SetActive(true);
+        Time.timeScale = 1f;
+        skin.SetActive(false);
+        baseball.SetActive(false);
+        skull.SetActive(false);
+    }
+    public void baseballHat()
+    {
+        baseball.SetActive(true);
+        mainMenu.SetActive(true);
+        Time.timeScale = 1f;
+        skin.SetActive(false);
+        skull.SetActive(false);
+        cowboy.SetActive(false);
+    }
+    public void skullMask()
+    {
+        skull.SetActive(true);
+        mainMenu.SetActive(true);
+        Time.timeScale = 1f;
+        skin.SetActive (false);
+        cowboy.SetActive (false);
+        baseball.SetActive (false);
+    }
+    public void normalBird()
+    {
+        skull.SetActive(false);
+        baseball.SetActive(false);  
+        cowboy.SetActive (false);
+        mainMenu.SetActive(true); 
+        skin.SetActive(false);
+        Time.timeScale = 1f;
         
     }
     public void powerUp()
     {
-
         StartCoroutine(TimerInvincible());
-
     }
 
     private IEnumerator TimerInvincible()
@@ -94,7 +150,6 @@ public class scriptbird : MonoBehaviour
         //GetComponent<Collider2D>().enabled = false;
 
         crown.SetActive(true);
-        
 
             yield return new WaitForSeconds(5f);
 
@@ -105,9 +160,31 @@ public class scriptbird : MonoBehaviour
             //GetComponent<Collider2D>().enabled = true;
 
             crown.SetActive(false);
-
         }
+    }
+    public void pausaPlayer()
+    {
+        StartCoroutine (CountdownPlayer());
+    }
+    
 
+    public IEnumerator CountdownPlayer()
+    {
 
+        Time.timeScale = 0f;
+
+        yield return new WaitForSeconds(2f);
+
+        if (timer <= 1f)
+        {
+            Time.timeScale = 1f;
+        }
+    }
+    public void restartPosition()
+    {
+        if (birdIsAlive == false)
+        { 
+            Bird.transform.position = StartPosition; 
+        }
     }
 }
