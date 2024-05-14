@@ -61,10 +61,11 @@ public class logicScript : MonoBehaviour
         gameOverScreen.SetActive(false);
         bird.mainMenu.SetActive(true);
         //bird.setActive(true);
-        //pipe.deadZone = -45;
+        //pipe.deadZone = -5;
         playerScore = 0;
         bird.birdIsAlive = true;
         bird.restartPosition();
+        pause.SetActive(true);
 
     }
     

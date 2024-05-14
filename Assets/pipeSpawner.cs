@@ -13,10 +13,8 @@ public class pipeSpawnerScript : MonoBehaviour
     void Start()
     {
         spawnPipe();
-        logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<logicScript>();
-
+        //logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<logicScript>();
     }
-
     // Update is called once per frame
     //when a pipe is out the screen it becames delete thanks the checkers of the deltaTime 
     void Update()
@@ -40,6 +38,7 @@ public class pipeSpawnerScript : MonoBehaviour
 
          Instantiate(pipe, new Vector3(transform.position.x, Random.Range (lowestPoint, heighestpoint), 0), transform.rotation);
     }
+    //methods for selected the difficult
     public void difficultEasy()
     {
         spawnRate = 2.5f;
@@ -48,10 +47,8 @@ public class pipeSpawnerScript : MonoBehaviour
     {
         spawnRate = 2f;
     }
-
     public void difficultHell()
     {
         spawnRate = 1.5f;
     }
-
 }

@@ -6,7 +6,7 @@ public class scriptbird : MonoBehaviour
 {  // variables
     public Rigidbody2D myRigidbody;
     public float flapSrenght;
-    private logicScript logic;
+    [SerializeField] public logicScript logic;
     public bool birdIsAlive = true;
     public GameObject Bird;
     public GameObject mainMenu;
@@ -29,7 +29,7 @@ public class scriptbird : MonoBehaviour
     void Start()
     {
         //bruh non usare il gameobject.find
-        logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<logicScript>();
+        //logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<logicScript>();
         //pipe = GameObject.FindGameObjectWithTag("Pipe").GetComponent<pipeMoveScript>();
         StartPosition = transform.position;
     }
@@ -37,8 +37,6 @@ public class scriptbird : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   //chekers that see if the bird is alive
-        
-        
         if (Input.GetKeyDown(KeyCode.Space) && birdIsAlive)
         {
             myRigidbody.velocity = Vector2.up * flapSrenght;
@@ -59,8 +57,6 @@ public class scriptbird : MonoBehaviour
             Bird.SetActive(false);
             restartPosition();
         }
-
-        
     }
     //method for confirm the game over 
     //change indentation
@@ -81,7 +77,6 @@ public class scriptbird : MonoBehaviour
     //method for the button start 
     public void startGame()
     {
-        
         //Debug.Log("main Menu Deleted");
         Bird.SetActive(true);
         mainMenu.SetActive(false);
@@ -91,9 +86,6 @@ public class scriptbird : MonoBehaviour
         item.SetActive(true);
         //pipe.deadZone = -45;
         //pausaPlayer();
-        
-
-        
     }
     public void skinMenu()
     {
@@ -136,7 +128,6 @@ public class scriptbird : MonoBehaviour
         mainMenu.SetActive(true); 
         skin.SetActive(false);
         Time.timeScale = 1f;
-        
     }
     public void powerUp()
     {

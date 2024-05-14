@@ -4438,6 +4438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myRigidbody: {fileID: 1263023576}
   flapSrenght: 10
+  logic: {fileID: 947635462}
   birdIsAlive: 1
   Bird: {fileID: 1263023570}
   mainMenu: {fileID: 164675151}

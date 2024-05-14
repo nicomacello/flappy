@@ -20,10 +20,8 @@ public class itemMoveScript : MonoBehaviour
 
         if (transform.position.x < deadZone)
         {
-
             //Debug.Log("Item Delted");
             Destroy(gameObject); 
-
         }
     }
 }
